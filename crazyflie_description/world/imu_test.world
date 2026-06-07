@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="test">
+
+    <plugin
+      filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics"/>
+
+    <plugin
+      filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster"/>
+
+    <plugin
+      filename="gz-sim-sensors-system"
+      name="gz::sim::systems::Sensors"/>
+
+    <model name="imu_test">
+
+      <link name="base_link">
+
+        <inertial>
+          <mass>1.0</mass>
+          <inertia>
+            <ixx>0.1</ixx>
+            <iyy>0.1</iyy>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+
+        <sensor name="imu_sensor" type="imu">
+          <always_on>true</always_on>
+          <update_rate>100</update_rate>
+          <topic>imu</topic>
+        </sensor>
+
+      </link>
+
+    </model>
+
+  </world>
+</sdf>

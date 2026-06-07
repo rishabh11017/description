@@ -25,23 +25,24 @@
     <color rgba="1 1 0 1"/>
   </material>
 
+
   <!-- ===================================================== -->
   <!-- BASE LINK -->
   <!-- ===================================================== -->
 
   <link name="base_link">
+   
 
     <!-- ================= VISUAL ================= -->
 
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-
+      
       <geometry>
-        <mesh filename="package://crazyflie_description/meshes/base.stl"
-              scale="0.001 0.001 0.001"/>
+        
+         <box size="0.095 0.095 0.025"/>
+         <material name="black"/>
       </geometry>
-
-      <material name="black"/>
+      
     </visual>
 
     <!-- ================= COLLISION ================= -->
@@ -85,10 +86,10 @@
   <link name="propeller_ccw_1">
 
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="-0.003 -0.02314 0.005" rpy="0 0 0"/>
 
       <geometry>
-        <mesh filename="package://crazyflie_description/meshes/propeller_ccw.stl"
+        <mesh filename="package://crazyflie_description/meshes/newwing_ccw.stl"
               scale="0.001 0.001 0.001"/>
       </geometry>
 
@@ -96,7 +97,7 @@
     </visual>
 
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0.005" rpy="0 0 0"/>
 
       <geometry>
         <cylinder radius="0.023" length="0.004"/>
@@ -123,7 +124,7 @@
     <parent link="base_link"/>
     <child link="propeller_ccw_1"/>
 
-    <origin xyz="0.0316 0.0316 -0.0113"
+    <origin xyz="0.0316 0.0316 0.0113"
             rpy="0 0 0"/>
 
     <axis xyz="0 0 1"/>
@@ -138,10 +139,10 @@
   <link name="propeller_cw_2">
 
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="-0.003 -0.02314 0.005" rpy="0 0 0"/>
 
       <geometry>
-        <mesh filename="package://crazyflie_description/meshes/propeller_cw.stl"
+        <mesh filename="package://crazyflie_description/meshes/newwing_cw.stl"
               scale="0.001 0.001 0.001"/>
       </geometry>
 
@@ -149,7 +150,7 @@
     </visual>
 
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0.005" rpy="0 0 0"/>
 
       <geometry>
         <cylinder radius="0.023" length="0.004"/>
@@ -176,10 +177,10 @@
     <parent link="base_link"/>
     <child link="propeller_cw_2"/>
 
-    <origin xyz="0.0316 -0.0316 -0.0113"
+    <origin xyz="0.0316 -0.0316 0.0113"
             rpy="0 0 0"/>
 
-    <axis xyz="0 0 -1"/>
+    <axis xyz="0 0 1"/>
 
   </joint>
 
@@ -191,10 +192,10 @@
   <link name="propeller_ccw_3">
 
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="-0.003 -0.02315 0.005" rpy="0 0 0"/>
 
       <geometry>
-        <mesh filename="package://crazyflie_description/meshes/propeller_ccw.stl"
+        <mesh filename="package://crazyflie_description/meshes/newwing_ccw.stl"
               scale="0.001 0.001 0.001"/>
       </geometry>
 
@@ -202,7 +203,7 @@
     </visual>
 
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0.005" rpy="0 0 0"/>
 
       <geometry>
         <cylinder radius="0.023" length="0.004"/>
@@ -229,7 +230,7 @@
     <parent link="base_link"/>
     <child link="propeller_ccw_3"/>
 
-    <origin xyz="-0.0316 -0.0316 -0.0113"
+    <origin xyz="-0.0316 -0.0316 0.0113"
             rpy="0 0 0"/>
 
     <axis xyz="0 0 1"/>
@@ -244,10 +245,10 @@
   <link name="propeller_cw_4">
 
    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="-0.003 -0.02314 0.005" rpy="0 0 0"/>
 
       <geometry>
-        <mesh filename="package://crazyflie_description/meshes/propeller_cw.stl"
+        <mesh filename="package://crazyflie_description/meshes/newwing_cw.stl"
               scale="0.001 0.001 0.001"/>
       </geometry>
 
@@ -255,7 +256,7 @@
     </visual>
 
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0.005" rpy="0 0 0"/>
 
       <geometry>
         <cylinder radius="0.023" length="0.004"/>
@@ -283,11 +284,106 @@
     <parent link="base_link"/>
     <child link="propeller_cw_4"/>
 
-    <origin xyz="-0.0316 0.0316 -0.0113"
+    <origin xyz="-0.0316 0.0316 0.0113"
             rpy="0 0 0"/>
 
     <axis xyz="0 0 -1"/>
 
   </joint>
+
+
+<!-- ===============imu sensor==================-->
+   <link name="imu_link">
+  <inertial>
+    <mass value="0.01"/>
+    <origin xyz="0 0 0"/>
+    <inertia ixx="1e-9" ixy="0" ixz="0"
+             iyy="1e-9" iyz="0"
+             izz="1e-9"/>
+  </inertial>
+</link>
+
+<joint name="imu_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="imu_link"/>
+  <origin xyz="0 0 0"/>
+</joint>
+
+
+
+
+<gazebo reference="imu_link">
+  <sensor name="imu_sensor" type="imu">
+    <always_on>true</always_on>
+    <update_rate>500</update_rate>
+   
+   <imu>
+   <angular_velocity>
+        <x>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>0.0002</stddev>
+          </noise>
+        </x>
+        <y>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>0.0002</stddev>
+          </noise>
+        </y>
+        <z>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>0.0002</stddev>
+          </noise>
+        </z>
+      </angular_velocity>
+
+      <linear_acceleration>
+        <x>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>0.02</stddev>
+          </noise>
+        </x>
+        <y>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>0.02</stddev>
+          </noise>
+        </y>
+        <z>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>0.02</stddev>
+          </noise>
+        </z>
+      </linear_acceleration>
+    </imu>
+
+    
+  </sensor>
+</gazebo>
+
+<!--===============gps===============================-->
+<gazebo>
+  <plugin
+      filename="gz-sim-pose-publisher-system"
+      name="gz::sim::systems::PosePublisher">
+
+    <publish_link_pose>true</publish_link_pose>
+    <publish_sensor_pose>true</publish_sensor_pose>
+    <publish_collision_pose>true</publish_collision_pose>
+    <publish_visual_pose>false</publish_visual_pose>
+    <publish_nested_model_pose>true</publish_nested_model_pose>
+    <use_pose_vector_msg>true</use_pose_vector_msg>
+    <static_publisher>true</static_publisher>
+    <static_update_frequency>1.0</static_update_frequency>
+
+  </plugin>
+</gazebo>
+
+
+
 
 </robot>
