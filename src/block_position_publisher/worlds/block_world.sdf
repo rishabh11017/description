@@ -1,0 +1,259 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="movable_shapes_world">
+    
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <gravity>0 0 -9.8</gravity>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics">
+    </plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+    <plugin filename="gz-sim-apply-link-wrench-system" name="gz::sim::systems::ApplyLinkWrench">
+    </plugin>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Quadcopter Model -->
+    <model name="quadcopter">
+      <pose>0 0 0.5 0 0 0</pose>
+
+      <!-- Central Block -->
+      <link name="base_link">
+        <inertial>
+          <mass>0.027</mass>
+          <inertia>
+            <ixx>1.395e-5</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1.395e-5</iyy>
+            <iyz>0</iyz>
+            <izz>2.173e-5</izz>
+          </inertia>
+        </inertial>
+        <collision name="base_collision">
+          <geometry>
+            <box>
+              <size>1 1 0.2</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="base_visual">
+          <geometry>
+            <box>
+              <size>1 1 0.2</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.2 0.2 0.8 1</ambient>
+            <diffuse>0.2 0.2 0.8 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Propeller Front-Left -->
+      <link name="prop_fl">
+        <pose>0.4 0.4 0.15 0 0 0</pose>
+        <inertial>
+          <mass>1.0</mass>
+          <inertia>
+            <ixx>0.01</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.01</iyy>
+            <iyz>0</iyz>
+            <izz>0.01</izz>
+          </inertia>
+        </inertial>
+        <collision name="prop_fl_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="prop_fl_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.8 0.2 0.2 1</ambient>
+            <diffuse>0.8 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Propeller Front-Right -->
+      <link name="prop_fr">
+        <pose>0.4 -0.4 0.15 0 0 0</pose>
+        <inertial>
+          <mass>1.0</mass>
+          <inertia>
+            <ixx>0.01</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.01</iyy>
+            <iyz>0</iyz>
+            <izz>0.01</izz>
+          </inertia>
+        </inertial>
+        <collision name="prop_fr_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="prop_fr_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.8 0.2 0.2 1</ambient>
+            <diffuse>0.8 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Propeller Back-Left -->
+      <link name="prop_bl">
+        <pose>-0.4 0.4 0.15 0 0 0</pose>
+        <inertial>
+          <mass>1.0</mass>
+          <inertia>
+            <ixx>0.01</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.01</iyy>
+            <iyz>0</iyz>
+            <izz>0.01</izz>
+          </inertia>
+        </inertial>
+        <collision name="prop_bl_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="prop_bl_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.8 0.2 0.2 1</ambient>
+            <diffuse>0.8 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Propeller Back-Right -->
+      <link name="prop_br">
+        <pose>-0.4 -0.4 0.15 0 0 0</pose>
+        <inertial>
+          <mass>1.0</mass>
+          <inertia>
+            <ixx>0.01</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.01</iyy>
+            <iyz>0</iyz>
+            <izz>0.01</izz>
+          </inertia>
+        </inertial>
+        <collision name="prop_br_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="prop_br_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.8 0.2 0.2 1</ambient>
+            <diffuse>0.8 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Fixed Joints -->
+      <joint name="joint_fl" type="fixed">
+        <parent>base_link</parent>
+        <child>prop_fl</child>
+      </joint>
+      <joint name="joint_fr" type="fixed">
+        <parent>base_link</parent>
+        <child>prop_fr</child>
+      </joint>
+      <joint name="joint_bl" type="fixed">
+        <parent>base_link</parent>
+        <child>prop_bl</child>
+      </joint>
+      <joint name="joint_br" type="fixed">
+        <parent>base_link</parent>
+        <child>prop_br</child>
+      </joint>
+
+      <!-- Pose Publisher Plugin -->
+      <plugin filename="libgz-sim-pose-publisher-system.so"
+              name="gz::sim::systems::PosePublisher">
+        <publish_world_pose>true</publish_world_pose>
+        <update_rate>50</update_rate>
+      </plugin>
+      <!-- Odometry Publisher Plugin -->
+      <plugin filename="libgz-sim-odometry-publisher-system.so"
+              name="gz::sim::systems::OdometryPublisher">
+        <odom_publish_frequency>50</odom_publish_frequency>
+      </plugin>
+
+    </model>
+
+  </world>
+</sdf>
